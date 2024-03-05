@@ -4,7 +4,7 @@ import { VStack } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <VStack mt={"70px"}>
+    <VStack>
       <Header></Header>
       <List></List>
     </VStack>
