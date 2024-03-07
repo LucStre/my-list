@@ -24,7 +24,6 @@ import { useEffect, useRef, useState } from "react";
 
 export function List() {
   const [data, setData] = useState<any[]>([]);
-  const [filteredData, setFilteredData] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<any>();
@@ -32,23 +31,15 @@ export function List() {
   useEffect(() => {
     userStore.fetchData({ size: 5 }).then(() => {
       setData(userStore.data);
-      setFilteredData(userStore.data);
     });
   }, []);
 
   const handleFilter = (event: any) => {
-    setFilteredData(
-      data.filter((user) =>
-        user.address.state
-          .toLowerCase()
-          .includes(event.target.value.toLowerCase())
-      )
-    );
+    setData(userStore.filterData(event.target.value));
   };
 
   const handleDelete = () => {
     setData(data.filter((user) => user.id != deleteId));
-    setFilteredData(filteredData.filter((user) => user.id != deleteId));
     onClose();
   };
 
@@ -73,7 +64,7 @@ export function List() {
             </Tr>
           </Thead>
           <Tbody>
-            {filteredData.map((user) => {
+            {data.map((user) => {
               return (
                 <Tr key={user.id}>
                   <Td>

@@ -11,6 +11,12 @@ class UserStore {
     makeObservable(this);
   }
 
+  filterData = (filter) => {
+    return this.data.filter((user) =>
+      user.address.state.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   fetchData = async (paramsData) => {
     try {
       var params = {
