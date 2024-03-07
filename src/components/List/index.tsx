@@ -20,19 +20,19 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
+import { observer } from "mobx-react";
 import { useEffect, useRef, useState } from "react";
 
-export function List() {
+export const List = observer(() => {
   const [data, setData] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<any>();
+  const { myUsers } = userStore;
 
   useEffect(() => {
-    userStore.fetchData({ size: 5 }).then(() => {
-      setData(userStore.data);
-    });
-  }, []);
+    setData(myUsers);
+  }, [myUsers]);
 
   const handleFilter = (event: any) => {
     setData(userStore.filterData(event.target.value));
@@ -120,4 +120,4 @@ export function List() {
       </TableContainer>
     </Stack>
   );
-}
+});
