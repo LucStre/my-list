@@ -1,4 +1,4 @@
-import { makeObservable, runInAction, observable, action } from "mobx";
+import { action, makeObservable, observable, runInAction } from "mobx";
 import { BaseService } from "../services/BaseService";
 
 class UserStore {
