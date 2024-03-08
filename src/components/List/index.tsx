@@ -10,6 +10,8 @@ import {
   Button,
   Image,
   Input,
+  LinkBox,
+  LinkOverlay,
   Stack,
   Table,
   TableContainer,
@@ -68,12 +70,22 @@ export const List = observer(() => {
               return (
                 <Tr key={user.id}>
                   <Td>
-                    <Image boxSize="80px" src={user.avatar} alt={user.id} />
+                    <LinkBox>
+                      <LinkOverlay
+                        href={`/user/${user.id}`}
+                        onClick={() =>
+                          localStorage.setItem("user", JSON.stringify(user))
+                        }
+                      >
+                        <Image boxSize="80px" src={user.avatar} alt={user.id} />
+                      </LinkOverlay>
+                    </LinkBox>
                   </Td>
                   <Td>{user.id}</Td>
                   <Td>{user.first_name + " " + user.last_name}</Td>
                   <Td>{user.email}</Td>
                   <Td>{user.address.state}</Td>
+
                   <Td>
                     <Button
                       colorScheme="red"
