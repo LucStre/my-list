@@ -41,7 +41,7 @@ export const List = observer(() => {
   };
 
   const handleDelete = () => {
-    setData(data.filter((user) => user.id != deleteId));
+    userStore.deleteData(deleteId);
     onClose();
   };
 

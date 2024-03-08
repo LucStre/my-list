@@ -41,6 +41,13 @@ class UserStore {
   addData = (user) => {
     this.myUsers.push(user);
   };
+
+  deleteData(id) {
+    const deleteId = this.myUsers.findIndex((user) => user.id === id);
+    if (deleteId !== -1) {
+      this.myUsers.splice(deleteId, 1);
+    }
+  }
 }
 const userStore = new UserStore();
 export default userStore;
